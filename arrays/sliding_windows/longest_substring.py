@@ -42,22 +42,14 @@ def length_of_longest_substring(s: str) -> int:
     Returns:
         Length of the longest substring with all distinct characters
     """
-    start, end, max_length = 0, 0, 0
-    character_set = set()
-
+    state = {}
+    start = 0
+    max_length = 0
     for end in range(len(s)):
-        print(f"End is {end}")
-        if s[end] not in character_set:
-            character_set.add(s[end])
-            print(character_set)
-        else:
-            while s[end] in character_set:
-                character_set.remove(s[start])
-                start += 1
-            character_set.add(s[end])
+        if s[end] in state:
+            start = max(start, state[s[end]] + 1)
+        state[s[end]] = end
         max_length = max(max_length, end - start + 1)
-        print(f"Max is {max_length}")
-
     return max_length
 
 def test_length_of_longest_substring():
