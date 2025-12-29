@@ -48,7 +48,7 @@ def max_fruits(fruits):
         while len(state) > 2:
             state[fruits[start]] -= 1
             if state[fruits[start]] == 0:
-                state.pop(fruits[start])
+                del state[fruits[start]]
             start += 1
 
         # Update maximum only after ensuring window is valid (at most 2 types)
